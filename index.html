@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="icon" href="./Dr  Jaisons BRO (1)-03.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Success Message Styling */
+      #successMessage {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: none;
+      }
+    </style>
+  </head>
+  <body id="particles-js">
+    <div class="form-container">
+      <div class="logo-container">
+        <img
+          src="./Dr  Jaisons BRO (1)-03.png"
+          alt="Dr. Jaison's Logo"
+          class="logo-image"
+          style="max-width: 100px"
+        />
+        <img
+          src="./logo.png"
+          alt="Company Logo"
+          class="logo-image"
+          style="max-width: 150px"
+        />
+      </div>
+      <form
+        id="contactForm"
+        class="form"
+        method="post"
+        action="https://script.google.com/macros/s/AKfycbzuHoxibc6qSfSzJQi-fqi2bnRFR_bAkARH2sY-wnCgK7AqSxEdtbQ9eskdN37uL1YMUw/exec"
+        name="contact-form"
+      >
+        <p class="title">REGISTRATION FORM</p>
+        <h2 class="message" style="font-weight: 700">
+          Sign Up Now to Experience The Event!
+        </h2>
+        <div class="flex">
+          <label>
+            <input
+              class="input"
+              type="text"
+              placeholder=""
+              name="firstname"
+              required=""
+            />
+            <span>Firstname</span>
+          </label>
+          <label>
+            <input
+              class="input"
+              type="text"
+              placeholder=""
+              name="lastname"
+              required=""
+            />
+            <span>Lastname</span>
+          </label>
+        </div>
+
+        <label>
+          <input
+            class="input"
+            type="email"
+            placeholder=""
+            name="email"
+            required=""
+          />
+          <span>Email ID</span>
+        </label>
+
+        <label>
+          <input
+            class="input"
+            type="number"
+            placeholder=""
+            name="mobile"
+            required=""
+          />
+          <span>Mobile Number</span>
+        </label>
+        <div class="info">
+          <div class="info__icon"></div>
+          <div class="info__title">Preferred Weight Loss & Location</div>
+          <div class="info__close"></div>
+        </div>
+        <div class="flex-box">
+          <div class="my-form">
+            <div>
+              <input
+                id="check-1"
+                type="checkbox"
+                name="weight_goal"
+                value="20KG"
+              />
+              <label for="check-1">20KG</label>
+            </div>
+            <div>
+              <input
+                checked=""
+                id="check-2"
+                type="checkbox"
+                name="weight_goal"
+                value="10KG"
+              />
+              <label for="check-2">10KG</label>
+            </div>
+            <div>
+              <input
+                id="check-3"
+                type="checkbox"
+                name="weight_goal"
+                value="15KG"
+              />
+              <label for="check-3">15KG</label>
+            </div>
+          </div>
+          <div>
+            <div class="radio-input">
+              <input
+                value="AL Karama"
+                name="location"
+                id="value-1"
+                type="radio"
+              />
+              <label for="value-1">AL Karama</label>
+              <input value="Marina" name="location" id="value-2" type="radio" />
+              <label for="value-2">Marina</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="submit submit-btn">Submit</button>
+      </form>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="successMessage">
+      <div class="card">
+        <div class="header">
+          <div class="image">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M20 7L9.00004 18L3.99994 13"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="content">
+            <span class="title">Registration Successful</span>
+            <p class="message">
+              You have registered successfully. We will contact you soon for
+              further details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Handle form submission
+      const contactForm = document.getElementById("contactForm");
+      const successMessage = document.getElementById("successMessage");
+
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const formAction = contactForm.action;
+
+        // Submit the form data to Google Apps Script
+        fetch(formAction, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              // Show success message
+              successMessage.style.display = "block";
+              // Hide the success message after 5 seconds
+              setTimeout(() => {
+                successMessage.style.display = "none";
+              }, 5000);
+              // Reset the form
+              contactForm.reset();
+            } else {
+              alert("There was an error. Please try again.");
+            }
+          })
+          .catch((error) => {
+            alert("There was an error. Please try again.");
+          });
+      });
+
+      // Close the success message
+      function closeSuccessMessage() {
+        successMessage.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
